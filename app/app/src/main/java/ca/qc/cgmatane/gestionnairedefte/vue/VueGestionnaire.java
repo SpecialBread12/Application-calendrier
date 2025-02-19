@@ -132,32 +132,14 @@ public class VueGestionnaire extends AppCompatActivity {
                 new int[] {android.R.id.text1, android.R.id.text2});
         vuelisteGestionnaire.setAdapter(adapteur);
     }
-/*
+
     public List<HashMap<String, String>> preparerListeFete() {
         List<HashMap<String, String>> listeFete = new ArrayList<HashMap<String, String>>();
         HashMap<String,String> fete;
 
-        fete = new HashMap<String,String>();
-        fete.put("Nom", "Jorn");
-        fete.put("Date", "8 Février");
-        listeFete.add(fete);
-
-        fete = new HashMap<String,String>();
-        fete.put("Nom", "Cola");
-        fete.put("Date", "23 Mars");
-        listeFete.add(fete);
-
-        fete = new HashMap<String,String>();
-        fete.put("Nom", "Carole");
-        fete.put("Date", "31 Décembre");
-        listeFete.add(fete);
-
-        fete = new HashMap<String,String>();
-        fete.put("Nom", "Épic Sax Guy");
-        fete.put("Date", "14 Janvier");
-        listeFete.add(fete);
+        
         return listeFete;
     }
 
- */
+
 }
