@@ -137,7 +137,7 @@ public class VueGestionnaire extends AppCompatActivity {
         List<HashMap<String, String>> listeFete = new ArrayList<HashMap<String, String>>();
         HashMap<String,String> fete;
 
-        
+
         return listeFete;
     }
 
