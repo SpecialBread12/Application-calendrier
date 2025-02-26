@@ -29,23 +29,20 @@ public class MainActivity extends AppCompatActivity {
         // Appel de l'API pour obtenir un utilisateur avec l'ID 1
         Call<Fete> call = apiService.getUser(1);
         call.enqueue(new Callback<Fete>() {
+            @Override
+            public void onResponse(Call<Fete> call, Response<Fete> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Fete fete = response.body();
+                    Log.d("Retrofit", "Nom : " + fete.getNom() + ", Email : " + fete.getDate());
+                } else {
+                    Log.e("Retrofit", "Erreur de réponse");
+                }
+            }
 
-
-
+            @Override
+            public void onFailure(Call<Fete> call, Throwable t) {
+                Log.e("Retrofit", "Erreur de connexion : " + t.getMessage());
+            }
         });
-    }
-
-    @Override
-    public void onResponse(Call<Fete> call, Response<Fete> response) {
-        if (response.isSuccessful() && response.body() != null) {
-            Fete fete = response.body();
-            Log.d("Retrofit", "Nom : " + fete.getName() + ", Email : " + user.getEmail());
-        } else {
-            Log.e("Retrofit", "Erreur de réponse");
-        }
-    }
-    @Override
-    public void onFailure(Call<User> call, Throwable t) {
-        Log.e("Retrofit", "Erreur de connexion : " + t.getMessage());
     }
 }
