@@ -19,12 +19,17 @@ import ca.qc.cgmatane.gestionnairedefte.R;
 import ca.qc.cgmatane.gestionnairedefte.vue.donnee.FeteDAO;
 import ca.qc.cgmatane.gestionnairedefte.vue.modele.Fete;
 
+
+
+
 public class VueAjouterFete extends AppCompatActivity {
 
     protected Intent intentionNaviguerListeFete;
     protected EditText vueAjouterFeteChampNom;
     protected EditText vueAjouterFeteChampDate;
     protected FeteDAO feteDAO;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,8 @@ public class VueAjouterFete extends AppCompatActivity {
                 }
         );
     }
+
+
     private void enregistrerFete(){
         //vueAjouterFeteChampNom.getText().toString();
         //vueAjouterFeteChampDate.getText().toString();

@@ -10,6 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import ca.qc.cgmatane.gestionnairedefte.vue.modele.Fete;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+
 
 public class FeteDAO {
     private static FeteDAO instance = null;
