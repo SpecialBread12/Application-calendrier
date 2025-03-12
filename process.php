@@ -6,8 +6,8 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "54.39.97.222"; // Remplace par ton serveur MySQL
-$username = "root";        // Ton nom d'utilisateur MySQL
-$password = "";            // Ton mot de passe MySQL
+$username = "calendrier";        // Ton nom d'utilisateur MySQL
+$password = "123";            // Ton mot de passe MySQL
 $dbname = "calendrier";   // Le nom de ta base de données
 
 $conn = new mysqli($servername, $username, $password, $dbname);

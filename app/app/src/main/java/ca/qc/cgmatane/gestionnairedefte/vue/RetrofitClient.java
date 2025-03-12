@@ -9,7 +9,7 @@ public class RetrofitClient {
     public static Retrofit getClient() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://ton-serveur.com/api/") // Remplace par ton URL
+                    .baseUrl("http://54.39.97.222/") // Remplace par ton URL
                     .addConverterFactory(GsonConverterFactory.create()) // Convertit le JSON
                     .build();
         }
