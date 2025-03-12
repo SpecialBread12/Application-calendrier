@@ -17,7 +17,9 @@ import ca.qc.cgmatane.gestionnairedefte.R;
 import ca.qc.cgmatane.gestionnairedefte.vue.donnee.FeteDAO;
 import ca.qc.cgmatane.gestionnairedefte.vue.modele.Fete;
 
-
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class VueAjouterFete extends AppCompatActivity {
@@ -121,6 +123,5 @@ public class VueAjouterFete extends AppCompatActivity {
         this.finish();
     }
 
-    public static class ApiService {
-    }
+
 }
