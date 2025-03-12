@@ -13,8 +13,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.HashMap;
-
 import ca.qc.cgmatane.gestionnairedefte.R;
 import ca.qc.cgmatane.gestionnairedefte.vue.donnee.FeteDAO;
 import ca.qc.cgmatane.gestionnairedefte.vue.modele.Fete;
@@ -107,5 +105,8 @@ public class VueAjouterFete extends AppCompatActivity {
     public void naviguerRetourFete()
     {
         this.finish();
+    }
+
+    public static class ApiService {
     }
 }
