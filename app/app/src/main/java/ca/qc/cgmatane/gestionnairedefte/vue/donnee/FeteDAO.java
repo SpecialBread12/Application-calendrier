@@ -94,6 +94,8 @@ public class FeteDAO {
         return listeFete;
 
     }
+
+
     /*
     public void ajouterFete(HashMap<String, String> fete){
         //listeFete.add(fete);

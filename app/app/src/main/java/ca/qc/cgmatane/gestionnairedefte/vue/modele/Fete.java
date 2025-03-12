@@ -1,16 +1,23 @@
 package ca.qc.cgmatane.gestionnairedefte.vue.modele;
-
+import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 
 public class Fete {
-    protected String nom;
-    protected String date;
+    @SerializedName("nom")
+    private String nom;
+
+    @SerializedName("date")
+    private String date;
     protected int id;
 
     public Fete(String nom, String date, int id){
         this.nom = nom;
         this.date = date;
         this.id = id;
+    }
+    public Fete(String nom, String date){
+        this.nom = nom;
+        this.date = date;
     }
     public int getId() {
         return id;

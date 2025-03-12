@@ -2,46 +2,66 @@ package ca.qc.cgmatane.gestionnairedefte.vue;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import ca.qc.cgmatane.gestionnairedefte.R;
-import ca.qc.cgmatane.gestionnairedefte.vue.modele.Fete;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.GET;
-import retrofit2.http.Query;
 
 public class MainActivity extends AppCompatActivity {
-    public interface ApiService {
-        @GET("getUser.php") // Correspond à l'URL de l'API côté serveur
-        Call<Fete> getUser(@Query("id") int feteId);
-    }
+
+    private EditText etNom, etEmail;
+    private Button btnEnvoyer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vue_ajouter_fete);
+        setContentView(R.layout.activity_main);
 
-        // Initialisation de l'API
-        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        etNom = findViewById(R.id.etNom);
+        etEmail = findViewById(R.id.etEmail);
+        btnEnvoyer = findViewById(R.id.btnEnvoyer);
 
-        // Appel de l'API pour obtenir un utilisateur avec l'ID 1
-        Call<Fete> call = apiService.getUser(1);
-        call.enqueue(new Callback<Fete>() {
+        btnEnvoyer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<Fete> call, Response<Fete> response) {
+            public void onClick(View v) {
+                envoyerDonnees();
+            }
+        });
+    }
+
+    private void envoyerDonnees() {
+        String nom = etNom.getText().toString().trim();
+        String email = etEmail.getText().toString().trim();
+
+        if (nom.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Utilisateur utilisateur = new Utilisateur(nom, email);
+
+        Call<ApiResponse> call = apiService.ajouterUtilisateur(utilisateur);
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Fete fete = response.body();
-                    Log.d("Retrofit", "Nom : " + fete.getNom() + ", Email : " + fete.getDate());
+                    Toast.makeText(MainActivity.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.e("Retrofit", "Erreur de réponse");
+                    Toast.makeText(MainActivity.this, "Erreur serveur", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<Fete> call, Throwable t) {
-                Log.e("Retrofit", "Erreur de connexion : " + t.getMessage());
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Échec de connexion : " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

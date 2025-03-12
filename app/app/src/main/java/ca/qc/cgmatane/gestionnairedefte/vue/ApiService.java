@@ -9,5 +9,5 @@ import retrofit2.http.POST;
 public interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("http://54.39.97.222/process.php") // Chemin du fichier PHP sur ton serveur
-    Call<ApiResponse> ajouterUtilisateur(@Body Fete fete);
+    Call<ApiResponse> ajouterFete(@Body Fete fete);
 }

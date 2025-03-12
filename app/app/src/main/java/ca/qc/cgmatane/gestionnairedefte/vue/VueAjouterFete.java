@@ -85,23 +85,37 @@ public class VueAjouterFete extends AppCompatActivity {
     }
 
 
-    private void enregistrerFete(){
-        //vueAjouterFeteChampNom.getText().toString();
-        //vueAjouterFeteChampDate.getText().toString();
-/*
-        HashMap<String,String> fete;
+    private void enregistrerFete() {
+        Fete fete = new Fete(
+                vueAjouterFeteChampNom.getText().toString(),
+                vueAjouterFeteChampDate.getText().toString()
+        );
 
-        fete = new HashMap<String,String>();
-        fete.put("Nom", vueAjouterFeteChampNom.getText().toString());
-        fete.put("Date", vueAjouterFeteChampDate.getText().toString());
-*/
-        Fete fete = new Fete(vueAjouterFeteChampNom.getText().toString(),
-                vueAjouterFeteChampDate.getText().toString(), 0);
-
-
+        // Enregistrement local (pas modifié)
         feteDAO = FeteDAO.getInstance();
         feteDAO.ajouterFete(fete);
+
+        // Envoi au serveur avec Retrofit
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+        Call<ApiResponse> call = apiService.ajouterFete(fete);
+
+        call.enqueue(new Callback<ApiResponse>() {
+            @Override
+            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "Fête envoyée avec succès !", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erreur d'envoi", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Problème de connexion : " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
+
     public void naviguerRetourFete()
     {
         this.finish();
